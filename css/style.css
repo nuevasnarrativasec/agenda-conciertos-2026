@@ -24,7 +24,7 @@
             --color-purple-dark: #1a0a2e;
             --color-purple: #2d1b4e;
             --color-purple-light: #4a2c7a;
-            --color-magenta: #e91e8c;
+            --color-magenta: #FF2974;
             --color-pink: #ff4d94;
             --color-cyan: #00e5d4;
             --color-yellow: #ffd60a;
@@ -446,19 +446,20 @@
             /*max-width: 500px;*/
             margin-left: auto;
             margin-right: auto;
+            min-height: 388px;
         }
 
         .video-container {
-            flex: 1;
+            /*flex: 1;*/
             aspect-ratio: 1;
-            max-width: 250px;
+            max-width: 266px;
             overflow: hidden;
         }
 
         .video-container iframe,
         .video-container video {
             width: 100%;
-            height: 100%;
+            height: 388px;
             object-fit: cover;
         }
 
@@ -585,21 +586,23 @@
             justify-content: center;
             align-items: center;
             gap: 30px;
-            margin-bottom: 40px;
+            max-width: 580px;
+            margin: 0 auto 10px;
         }
 
         .calendar-month-nav {
+            box-shadow: 2px 5px 0 var(--color-black);
             width: 45px;
             height: 45px;
             border-radius: 50%;
             border: 2px solid var(--color-black);
-            background: transparent;
+            background: var(--color-white);
             color: var(--color-black);
             cursor: pointer;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 2.5rem;
             transition: all 0.3s ease;
         }
 
@@ -609,25 +612,30 @@
         }
 
         .calendar-month-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font: 5rem / 1.1 'BINDORAN';
             color: var(--color-magenta);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            text-shadow: 5px 4px 0 rgba(0,0,0,0.8);
+            text-align: center;
+            width: 60%;    
         }
 
         .home-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--color-cyan);
-            background: transparent;
-            color: var(--color-cyan);
+            border-radius: 50%;            
+            background: var(--color-cyan);
+            border: 2px solid var(--color-black);
+            box-shadow: 2px 5px 0 var(--color-black);
+            color: var(--color-black);
             cursor: pointer;
+            height: 35px;
+            width: 35px;            
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
         }
+            .home-btn img{
+                max-width: 22px;
+            }
 
         .home-btn:hover {
             background: var(--color-cyan);
@@ -637,10 +645,9 @@
         .calendar-grid {
             max-width: 600px;
             margin: 0 auto;
-            background: var(--color-white);
-            border-radius: 10px;
+            background: transparent;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 1px solid #000;
         }
 
         .calendar-weekdays {
@@ -651,9 +658,8 @@
         }
 
         .weekday {
+            font: 1.5rem / 1.1 'BINDORAN';
             text-align: center;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
             color: var(--color-black);
             padding: 10px;
         }
@@ -665,25 +671,26 @@
         }
 
         .calendar-day {
+            border: 2px solid var(--color-black);
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
+            font: 1.9rem / 1.1 'BINDORAN';
             color: var(--color-black);
-            background: #f5f5dc;
-            border-radius: 5px;
+            /*background: #f5f5dc;*/
             cursor: default;
             transition: all 0.3s ease;
         }
 
         .calendar-day.empty {
             background: transparent;
+            border: none;
         }
 
         .calendar-day.has-event {
-            background: #c9b896;
+            background: var(--color-white);
+            border: 2px solid var(--color-black);
             cursor: pointer;
         }
 
@@ -716,11 +723,10 @@
         }
 
         .search-label {
-            font-size: 0.9rem;
+            font: .9rem/1.1 'Acto black';
             color: var(--color-black);
             margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
         .search-wrapper {
@@ -730,10 +736,11 @@
         }
 
         .search-input {
-            flex: 1;
-            padding: 15px 25px;
-            border: none;
+            border: 2px solid var(--color-black);
             border-radius: 30px;
+            box-shadow: 3px 3px 0 var(--color-black);
+            flex: 1;
+            padding: 15px 25px;           
             font-family: var(--font-body);
             font-size: 1rem;
             background: var(--color-white);
@@ -741,7 +748,9 @@
         }
 
         .search-input::placeholder {
-            color: #999;
+            color: #000;
+            font: .9rem/1.1 'Acto black';
+            text-transform: uppercase;
         }
 
         .search-home-btn {
@@ -749,7 +758,7 @@
             height: 45px;
             border-radius: 50%;
             border: 2px solid var(--color-black);
-            background: transparent;
+            background: var(--color-yellow);
             color: var(--color-black);
             cursor: pointer;
             display: flex;
@@ -759,19 +768,20 @@
         }
 
         .search-home-btn:hover {
-            background: var(--color-black);
-            color: var(--color-cyan);
+            /*background: var(--color-black);
+            color: var(--color-cyan);*/
         }
 
         .artists-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
-            max-width: 1000px;
+            max-width: 920px;
             margin: 0 auto;
         }
 
         .artist-card {
+            box-shadow: 5px 5px 0 var(--color-magenta);
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -782,19 +792,17 @@
 
         .artist-image {
             width: 100%;
-            aspect-ratio: 1;
+            /*aspect-ratio: 1;*/
             object-fit: cover;
-            border: 4px solid var(--color-magenta);
         }
 
         .artist-name {
             background: var(--color-black);
             color: var(--color-white);
-            font-family: var(--font-display);
-            font-size: 1.1rem;
+            font: 2rem / 1.1 'BINDORAN';
+            margin-top: -4px;
             padding: 12px;
-            text-align: center;
-            letter-spacing: 0.05em;
+            text-align: left;
         }
 
         /* Concert Detail View (when clicking from calendar) */
@@ -832,18 +840,19 @@
             margin-bottom: 30px;
         }
 
+        .section-calendario .detail-header .home-btn{
+            display: none !important;
+        }
+
         .detail-month-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font: 5rem / 1.1 'BINDORAN';
             color: var(--color-magenta);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            text-shadow: 3px 5px 0 rgba(0,0,0,0.8);
             margin-bottom: 15px;
         }
 
         .back-btn {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 0.85rem;
+            font: 1rem / 1.1 'Acto black';
             padding: 10px 25px;
             border-radius: 25px;
             border: 2px solid var(--color-black);
@@ -862,6 +871,43 @@
         .detail-concerts {
             max-width: 800px;
             margin: 0 auto;
+        }
+
+        /* Detail Carousel */
+        .detail-carousel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 60px;
+        }
+
+        .detail-carousel-container .carousel-wrapper {
+            overflow: hidden;
+        }
+
+        .detail-carousel-container .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .detail-carousel-container .concert-card {
+            min-width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .detail-carousel-container .carousel-nav {
+            border-color: var(--color-black);
+            color: var(--color-black);
+        }
+
+        .detail-carousel-container .carousel-nav:hover {
+            background: var(--color-black);
+            color: var(--color-yellow);
+        }
+
+        .detail-carousel-container .carousel-nav-label {
+            color: var(--color-black);
         }
 
         /* Loading State */
@@ -914,6 +960,10 @@
                 padding: 0 50px;
             }
 
+            .detail-carousel-container {
+                padding: 0 50px;
+            }
+
             .concert-media {
                 flex-direction: column;
                 align-items: center;
@@ -951,6 +1001,10 @@
             }
 
             .carousel-container {
+                padding: 0 45px;
+            }
+
+            .detail-carousel-container {
                 padding: 0 45px;
             }
         }

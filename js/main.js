@@ -1,18 +1,18 @@
- // ==========================================
-        // CONFIGURACIÓN - GOOGLE SHEETS
+// ==========================================
+        // CONFIGURACIÃ“N - GOOGLE SHEETS
         // ==========================================
         // Reemplaza este ID con el ID de tu Google Sheet
         const SHEET_ID = '19dEHaMULZ8lIPLFYY66jBtnTh0jXeQ9unG8ktL0nxbQ';
         const SHEET_NAME = 'conciertos'; // Nombre de la hoja
-        const API_KEY = 'TU_API_KEY_AQUI'; // Opcional si el sheet es público
+        const API_KEY = 'TU_API_KEY_AQUI'; // Opcional si el sheet es pÃºblico
         
         // URL para Google Sheets publicado como CSV
         // Formato: https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}
-        // Se agrega timestamp para evitar caché
+        // Se agrega timestamp para evitar cachÃ©
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}&t=${Date.now()}`;
 
         // ==========================================
-        // DATOS DE EJEMPLO (se reemplazarán con Google Sheets)
+        // DATOS DE EJEMPLO (se reemplazarÃ¡n con Google Sheets)
         // ==========================================
         let concertsData = [
             {
@@ -35,12 +35,12 @@
                 id: 2,
                 artist: "JOHN SUMMIT",
                 date: "2026-01-14",
-                dayName: "MIÉRCOLES",
+                dayName: "MIÃ‰RCOLES",
                 dayNumber: 14,
                 month: "ENERO",
                 monthNumber: 1,
                 year: 2026,
-                venue: "Arena Perú",
+                venue: "Arena PerÃº",
                 time: "10:00 PM",
                 videoId: "def456",
                 ticketUrl: "https://joinnus.com",
@@ -49,7 +49,7 @@
             },
             {
                 id: 3,
-                artist: "RAFO RÁEZ Y LOS PARANOIAS",
+                artist: "RAFO RÃEZ Y LOS PARANOIAS",
                 date: "2026-01-23",
                 dayName: "VIERNES",
                 dayNumber: 23,
@@ -81,9 +81,9 @@
             },
             {
                 id: 5,
-                artist: "AXÉ BAHIA",
+                artist: "AXÃ‰ BAHIA",
                 date: "2026-02-14",
-                dayName: "SÁBADO",
+                dayName: "SÃBADO",
                 dayNumber: 14,
                 month: "FEBRERO",
                 monthNumber: 2,
@@ -99,12 +99,12 @@
                 id: 6,
                 artist: "MANUEL DONAYRE",
                 date: "2026-12-09",
-                dayName: "MIÉRCOLES",
+                dayName: "MIÃ‰RCOLES",
                 dayNumber: 9,
                 month: "DICIEMBRE",
                 monthNumber: 12,
                 year: 2026,
-                venue: "Teatro Peruano Japonés",
+                venue: "Teatro Peruano JaponÃ©s",
                 time: "8:00 PM",
                 videoId: "pqr678",
                 ticketUrl: "https://teleticket.com.pe",
@@ -121,11 +121,15 @@
         let currentCalendarMonth = new Date().getMonth();
         let currentCalendarYear = 2026;
         let filteredConcerts = [];
+        
+        // Variables para el carrusel de detalle
+        let detailCarouselIndex = 0;
+        let detailConcerts = [];
 
         const monthNames = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
                           'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         
-        const dayNames = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+        const dayNames = ['DOMINGO', 'LUNES', 'MARTES', 'MIÃ‰RCOLES', 'JUEVES', 'VIERNES', 'SÃBADO'];
 
         // ==========================================
         // ELEMENTOS DEL DOM
@@ -140,7 +144,7 @@
         const calendarDays = document.getElementById('calendarDays');
         const artistsGrid = document.getElementById('artistsGrid');
         const artistSearch = document.getElementById('artistSearch');
-        const detailConcerts = document.getElementById('detailConcerts');
+        const detailCarouselTrack = document.getElementById('detailCarouselTrack');
         const detailMonthTitle = document.getElementById('detailMonthTitle');
 
         // ==========================================
@@ -212,13 +216,13 @@
         }
 
         // ==========================================
-        // FUNCIONES DE INICIALIZACIÓN
+        // FUNCIONES DE INICIALIZACIÃ“N
         // ==========================================
         function initializeApp() {
             // Ordenar conciertos por fecha
             concertsData.sort((a, b) => new Date(a.date) - new Date(b.date));
             
-            // Encontrar el próximo concierto
+            // Encontrar el prÃ³ximo concierto
             const today = new Date();
             const upcomingConcerts = concertsData.filter(c => new Date(c.date) >= today);
             
@@ -246,11 +250,14 @@
             
             // Configurar IntersectionObserver para autoplay
             setupVideoObserver();
+            
+            // Inicializar vista home con colores correctos
+            cambiarVista('home');
         }
 
         // IntersectionObserver para detectar cuando el video es visible
         let videoObserver = null;
-        let activeVideoIndex = -1; // Track del video actualmente reproduciéndose
+        let activeVideoIndex = -1; // Track del video actualmente reproduciÃ©ndose
         
         function setupVideoObserver() {
             const options = {
@@ -322,7 +329,7 @@
             currentMonthTitle.textContent = currentConcert.month;
 
             carouselTrack.innerHTML = filteredConcerts.map((concert, index) => {
-                // Inicialmente sin autoplay, el observer lo activará
+                // Inicialmente sin autoplay, el observer lo activarÃ¡
                 return `
                 <div class="concert-card" data-index="${index}">
                     <p class="concert-date">${concert.dayName} ${concert.dayNumber}</p>
@@ -335,11 +342,10 @@
                             <p class="concert-venue">${concert.venue}</p>
                             <p class="concert-time">${concert.time}</p>
                             <a href="${concert.ticketUrl}" target="_blank" class="ticket-btn">
-                                <img src="../img/icon-ticket.png">
-                                <div class="box-ticket">
-                                    <span class="entradas">Entradas en:</span>                                
-                                    <p>${concert.ticketProvider}</p>
-                                </div>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c1.1 0 2 .9 2 2s-.9 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/>
+                                </svg>
+                                Entradas en ${concert.ticketProvider}
                             </a>
                         </div>
                     </div>
@@ -348,18 +354,15 @@
 
             carouselTrack.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
             
-            // Reconectar el observer después de renderizar
+            // Reconectar el observer despuÃ©s de renderizar
             setTimeout(() => {
                 observeVideoContainers();
             }, 100);
-
-            // Actualizar estado de botones prev/next
-            updateCarouselButtons();
         }
 
         function renderVideo(videoId, autoplay = false) {
             // Para JWPlayer - usando el formato de content.jwplatform
-            // Parámetros: mute=true, autostart según contexto, loop, sin videos relacionados
+            // ParÃ¡metros: mute=true, autostart segÃºn contexto, loop, sin videos relacionados
             if (videoId && videoId !== '') {
                 const autoplayParam = autoplay ? 'true' : 'false';
                 return `
@@ -394,31 +397,10 @@
             if (filteredConcerts.length > 0) {
                 currentMonthTitle.textContent = filteredConcerts[currentCarouselIndex].month;
             }
-            
-            updateCarouselButtons();
-        }
-
-        function updateCarouselButtons() {
-            const prevBtn = document.getElementById('carouselPrev');
-            const nextBtn = document.getElementById('carouselNext');
-            
-            // Botón previo: inactivo si estamos en el primer elemento
-            if (currentCarouselIndex === 0) {
-                prevBtn.classList.add('inactivo');
-            } else {
-                prevBtn.classList.remove('inactivo');
-            }
-            
-            // Botón siguiente: inactivo si estamos en el último elemento
-            if (currentCarouselIndex >= filteredConcerts.length - 1) {
-                nextBtn.classList.add('inactivo');
-            } else {
-                nextBtn.classList.remove('inactivo');
-            }
         }
 
         function updateActiveVideo() {
-            // Forzar activación del video actual
+            // Forzar activaciÃ³n del video actual
             activateVideo(currentCarouselIndex);
         }
 
@@ -438,12 +420,12 @@
 
             let html = '';
 
-            // Días vacíos al inicio
+            // DÃ­as vacÃ­os al inicio
             for (let i = 0; i < startingDay; i++) {
                 html += '<div class="calendar-day empty"></div>';
             }
 
-            // Días del mes
+            // DÃ­as del mes
             for (let day = 1; day <= totalDays; day++) {
                 const dayDate = new Date(currentCalendarYear, currentCalendarMonth, day);
                 const isPast = dayDate < today && dayDate.toDateString() !== today.toDateString();
@@ -460,7 +442,7 @@
         }
 
         function renderArtists() {
-            // Obtener artistas únicos
+            // Obtener artistas Ãºnicos
             const uniqueArtists = [];
             const artistNames = new Set();
 
@@ -485,12 +467,20 @@
         }
 
         function renderDetailConcerts(concerts) {
-            detailConcerts.innerHTML = concerts.map((concert, index) => `
-                <div class="concert-card" style="color: var(--color-black);">
+            detailConcerts = concerts;
+            detailCarouselIndex = 0;
+            
+            if (concerts.length === 0) {
+                detailCarouselTrack.innerHTML = '<div class="concert-card"><p>No hay conciertos programados</p></div>';
+                return;
+            }
+
+            detailCarouselTrack.innerHTML = concerts.map((concert, index) => `
+                <div class="concert-card" data-detail-index="${index}" style="color: var(--color-black);">
                     <p class="concert-date" style="color: var(--color-magenta);">${concert.dayName} ${concert.dayNumber}</p>
                     <h3 class="concert-artist">${concert.artist}</h3>
                     <div class="concert-media">
-                        <div class="video-container">
+                        <div class="video-container" data-detail-video-index="${index}">
                             ${renderVideo(concert.videoId, index === 0)}
                         </div>
                         <div class="concert-info-box">
@@ -506,16 +496,71 @@
                     </div>
                 </div>
             `).join('');
+
+            detailCarouselTrack.style.transform = `translateX(0%)`;
+            updateDetailCarouselButtons();
+        }
+
+        function updateDetailCarouselPosition() {
+            detailCarouselTrack.style.transform = `translateX(-${detailCarouselIndex * 100}%)`;
+            
+            // Actualizar el título del mes según el concierto actual
+            if (detailConcerts.length > 0) {
+                const currentConcert = detailConcerts[detailCarouselIndex];
+                detailMonthTitle.textContent = currentConcert.month;
+            }
+            
+            // Activar el video del concierto actual
+            activateDetailVideo(detailCarouselIndex);
+            updateDetailCarouselButtons();
+        }
+
+        function activateDetailVideo(index) {
+            const concert = detailConcerts[index];
+            if (!concert || !concert.videoId) return;
+            
+            // Pausar videos anteriores en el carrusel de detalle
+            detailConcerts.forEach((c, i) => {
+                if (i !== index && c.videoId) {
+                    const container = detailCarouselTrack.querySelector(`[data-detail-video-index="${i}"]`);
+                    if (container) {
+                        container.innerHTML = renderVideo(c.videoId, false);
+                    }
+                }
+            });
+            
+            // Activar video actual
+            const container = detailCarouselTrack.querySelector(`[data-detail-video-index="${index}"]`);
+            if (container) {
+                container.innerHTML = renderVideo(concert.videoId, true);
+            }
+        }
+
+        function updateDetailCarouselButtons() {
+            const prevBtn = document.getElementById('detailCarouselPrev');
+            const nextBtn = document.getElementById('detailCarouselNext');
+            
+            if (prevBtn) {
+                prevBtn.style.opacity = detailCarouselIndex === 0 ? '0.3' : '1';
+                prevBtn.style.pointerEvents = detailCarouselIndex === 0 ? 'none' : 'auto';
+            }
+            if (nextBtn) {
+                nextBtn.style.opacity = detailCarouselIndex >= detailConcerts.length - 1 ? '0.3' : '1';
+                nextBtn.style.pointerEvents = detailCarouselIndex >= detailConcerts.length - 1 ? 'none' : 'auto';
+            }
         }
 
         // ==========================================
-        // FUNCIONES DE NAVEGACIÓN
+        // FUNCIONES DE NAVEGACIÃ“N
         // ==========================================
         function showView(view) {
             currentView = view;
             
             // Pausar todos los videos al cambiar de vista
             pauseAllVideos();
+            
+            // Cambiar colores del crowd-container segÃºn la vista
+            cambiarVista(view);
             
             monthSection.classList.remove('hidden');
             calendarSection.classList.remove('active');
@@ -525,7 +570,6 @@
             switch(view) {
                 case 'home':
                     monthSection.classList.remove('hidden');
-                    cambiarVista('home');
                     // Reconectar observer y activar video del carrusel actual
                     setTimeout(() => {
                         observeVideoContainers();
@@ -535,17 +579,14 @@
                 case 'calendar':
                     monthSection.classList.add('hidden');
                     calendarSection.classList.add('active');
-                    cambiarVista('calendario');
                     break;
                 case 'artists':
                     monthSection.classList.add('hidden');
                     artistsSection.classList.add('active');
-                    cambiarVista('artistas');
                     break;
                 case 'detail':
                     monthSection.classList.add('hidden');
                     detailSection.classList.add('active');
-                    cambiarVista('calendario'); // Detail usa el mismo color que calendario
                     break;
             }
         }
@@ -559,7 +600,7 @@
             // Resetear tracking
             activeVideoIndex = -1;
             
-            // Reemplazar todos los iframes con versión sin autoplay para pausarlos
+            // Reemplazar todos los iframes con versiÃ³n sin autoplay para pausarlos
             const allIframes = document.querySelectorAll('.jwplayer-iframe');
             allIframes.forEach(iframe => {
                 const videoId = iframe.getAttribute('data-video-id');
@@ -637,7 +678,7 @@
                 showView('calendar');
             });
 
-            // Navegación del carrusel
+            // NavegaciÃ³n del carrusel
             document.getElementById('carouselPrev').addEventListener('click', () => {
                 if (currentCarouselIndex > 0) {
                     currentCarouselIndex--;
@@ -654,7 +695,7 @@
                 }
             });
 
-            // Navegación del calendario
+            // NavegaciÃ³n del calendario
             document.getElementById('calendarPrevMonth').addEventListener('click', () => {
                 currentCalendarMonth--;
                 if (currentCalendarMonth < 0) {
@@ -678,12 +719,57 @@
             document.getElementById('artistsHomeBtn').addEventListener('click', goToHome);
             document.getElementById('detailHomeBtn').addEventListener('click', goToHome);
 
-            // Botón volver al calendario
+            // BotÃ³n volver al calendario
             document.getElementById('backToCalendarBtn').addEventListener('click', () => {
                 showView('calendar');
             });
 
-            // Búsqueda de artistas
+            // NavegaciÃ³n del carrusel de detalle
+            document.getElementById('detailCarouselPrev').addEventListener('click', () => {
+                if (detailCarouselIndex > 0) {
+                    detailCarouselIndex--;
+                    updateDetailCarouselPosition();
+                }
+            });
+
+            document.getElementById('detailCarouselNext').addEventListener('click', () => {
+                if (detailCarouselIndex < detailConcerts.length - 1) {
+                    detailCarouselIndex++;
+                    updateDetailCarouselPosition();
+                }
+            });
+
+            // Touch swipe para el carrusel de detalle
+            let detailTouchStartX = 0;
+            let detailTouchEndX = 0;
+
+            const detailTrack = document.getElementById('detailCarouselTrack');
+            if (detailTrack) {
+                detailTrack.addEventListener('touchstart', (e) => {
+                    detailTouchStartX = e.changedTouches[0].screenX;
+                });
+
+                detailTrack.addEventListener('touchend', (e) => {
+                    detailTouchEndX = e.changedTouches[0].screenX;
+                    handleDetailSwipe();
+                });
+            }
+
+            function handleDetailSwipe() {
+                const swipeThreshold = 50;
+                const diff = detailTouchStartX - detailTouchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0 && detailCarouselIndex < detailConcerts.length - 1) {
+                        detailCarouselIndex++;
+                    } else if (diff < 0 && detailCarouselIndex > 0) {
+                        detailCarouselIndex--;
+                    }
+                    updateDetailCarouselPosition();
+                }
+            }
+
+            // BÃºsqueda de artistas
             artistSearch.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
                 const artistCards = artistsGrid.querySelectorAll('.artist-card');
@@ -725,19 +811,27 @@
 
         function cambiarVista(vista) {
             const body = document.body;
-            // Remover todas las clases de sección
+            // Remover todas las clases de secciÃ³n
             body.classList.remove('section-home', 'section-artistas', 'section-calendario');
-            // Agregar la nueva
-            body.classList.add(`section-${vista}`);
+            
+            // Mapear vistas a clases CSS
+            const vistaMap = {
+                'home': 'section-home',
+                'artists': 'section-artistas',
+                'calendar': 'section-calendario',
+                'detail': 'section-calendario' // detail usa el mismo color que calendario (amarillo)
+            };
+            
+            // Agregar la nueva clase
+            if (vistaMap[vista]) {
+                body.classList.add(vistaMap[vista]);
+            }
         }
 
         // ==========================================
-        // INICIAR LA APLICACIÓN
+        // INICIAR LA APLICACIÃ“N
         // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Establecer la clase inicial para las manos
-            document.body.classList.add('section-home');
-            
             // Intentar cargar desde Google Sheets, si falla usar datos de ejemplo
             loadDataFromGoogleSheets();
         });
