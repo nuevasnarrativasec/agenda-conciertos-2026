@@ -51,6 +51,7 @@ html {
 body {
     background-attachment: fixed;
     background-image: url('../img/bg.jpg');
+    background-repeat: no-repeat;
     background-size: 100%;
     font-family: var(--font-body);
     color: var(--color-white);
@@ -429,6 +430,7 @@ body {
 }
 
 .concert-artist {
+    color: #fff;
     font: 4rem / 1.1 'BINDORAN';
     margin-bottom: 20px;
     text-shadow: 3px 3px 0 var(--color-black);
@@ -1040,6 +1042,33 @@ body {
     .video-container video {
         height: 250px;
     }
+
+    .main-title h1{
+        font: 5rem/1.2 'BINDORAN';
+    }
+    .main-title h2{
+        font-size: 1.8rem;
+    }
+    .year-badge{
+        bottom: -55px;
+        width: 60px;
+    }
+    body{
+        background-size: cover;
+    }
+    .hero{
+        padding: 30px 0 0;
+    }
+    .crowd-container{
+        height: 100px;
+    }
+    .hero-buttons{
+        margin-bottom: 40px;
+    }
+    .concert-artist {
+        font-size: 3rem;
+    }
+
 }
 
 /* Hidden */

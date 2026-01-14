@@ -356,7 +356,7 @@ function renderCarousel() {
                     <p class="concert-venue">${concert.venue}</p>
                     <p class="concert-time">${concert.time}</p>
                     <a href="${concert.ticketUrl}" target="_blank" class="ticket-btn">
-                        <img src="../img/icon-ticket.png" width="100%">
+                        <img src="./img/icon-ticket.png" width="100%">
                         <div class="box-ticket"> 
                             <p>Entradas en: </p>
                             <span>${concert.ticketProvider}</span>
@@ -552,10 +552,11 @@ function renderDetailConcerts(concerts, initialIndex = 0) {
                     <p class="concert-venue">${concert.venue}</p>
                     <p class="concert-time">${concert.time}</p>
                     <a href="${concert.ticketUrl}" target="_blank" class="ticket-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c1.1 0 2 .9 2 2s-.9 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-9 7.5h-2v-2h2v2zm0-4.5h-2v-2h2v2zm0-4.5h-2v-2h2v2z"/>
-                        </svg>
-                        Entradas en ${concert.ticketProvider}
+                        <img src="./img/icon-ticket.png" width="100%">
+                        <div class="box-ticket"> 
+                            <p>Entradas en: </p>
+                            <span>${concert.ticketProvider}</span>
+                        </div>  
                     </a>
                 </div>
             </div>
