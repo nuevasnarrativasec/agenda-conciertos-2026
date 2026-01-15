@@ -953,10 +953,19 @@ body {
 }
 
 /* Responsive */
+
+@media (max-width: 1024px) {
+
+    .crowd-container{
+        height: 290px;
+    }
+
+}
+
 @media (max-width: 768px) {
     .hero {
         min-height: 50vh;
-        padding: 30px 15px;
+        padding: 30px 0 0;
     }
 
     .floating-element {
@@ -1015,6 +1024,10 @@ body {
 
     .weekday {
         font-size: 1rem;
+    }
+
+    .crowd-container{
+        height: 220px;
     }
 }
 
