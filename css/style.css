@@ -536,6 +536,7 @@ body {
 
 .box-ticket{
     display: inline-block;
+    text-align: left;
     vertical-align: top;
 }
 
