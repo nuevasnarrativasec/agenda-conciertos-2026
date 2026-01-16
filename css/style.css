@@ -1082,6 +1082,9 @@ body {
     .concert-artist {
         font-size: 3rem;
     }
+    .artist-name{
+        min-height: 95px;
+    }
 
 }
 
