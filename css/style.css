@@ -823,6 +823,7 @@ body {
     color: var(--color-white);
     font: 2rem / 1.1 'BINDORAN';
     margin-top: -4px;
+    min-height: 98px;
     padding: 12px;
     text-align: left;
 }
