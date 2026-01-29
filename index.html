@@ -5,30 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda de Conciertos 2026 | El Comercio</title>
 
-    <link rel="stylesheet" href="./css/style.css?v6">
+    <link rel="stylesheet" href="./css/style.css?v16">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
+    <style>
+        /* Ocultar anuncios y elementos no deseados */   
+        #clever-45754-1988799-sticky-footer,    
+        .tp-modal,
+        .tp-backdrop.tp-active,
+        .content_gpt_top_ads, 
+        .sticky-top, 
+        .nav-d__menu.active,
+        #gpt_cover,
+        .content_gpt_top_ads,
+        .skin-template-model0.ads_pushed,
+        .skin-template-model0,
+        #clever-45754-889974-sticky-footer,
+        #clever-45754-1475206-sticky-footer-iframe,
+        #gpt_zocalo, 
+        #clever-45754-sticky-footer-shadow,
+        #browsi_wrapper_0_ai_1_rc_0,
+        #browsi_wrapper_1_ai_1_rc_0,
+        #browsi_wrapper_2_ai_1_rc_0,
+        #browsi_wrapper_3_ai_1_rc_0,
+        #browsi_wrapper_4_ai_1_rc_0,
+        #browsi_wrapper_5_ai_1_rc_0,
+        #browsi_wrapper_6_ai_1_rc_0,
+        #browsi_wrapper_7_ai_1_rc_0,
+        #browsi_wrapper_8_ai_1_rc_0,
+        #browsi_wrapper_9_ai_1_rc_0,
+        #browsi_wrapper_10_ai_1_rc_0,
+        .fs-sticky-footer,
+        .orp-player-wrapper,
+        #clever-45754-sticky-footer,
+        #clever-45754-1475206-sticky-footer-shadow,
+        #elcomercio_zocalo{
+            display: none !important;
+            height: 0 !important;
+        }   
+        #header-container,
+        .nav-d__main-scroll.scrolled{
+            z-index: 99999999;
+        }
+        #nav-wm-container{
+            position: relative;
+            z-index: 99999999;
+        }
+        .skin-template-model0 {
+		    top: 100px !important;
+		    z-index: -1 !important;
+		}
+        body{
+            overflow-y: scroll !important;
+        }
+        .content-layout-container {
+            background-color: transparent !important;
+        }
+        .tp-modal-open{
+            overflow: auto !important;
+        }
+    </style>
+
 </head>
 <body>
+    <div id="social">
+        <button id="fb" class="sharer button" data-sharer="facebook" data-hashtag="" data-url="https://elcomercio.pe/politica/elecciones-peru-2026-planes-de-gobierno-propuestas-comparacion-fact-checking-candidatos-presidenciales-especdis-noticia/">Facebook</button>
+        <button id="wst" class="sharer button" data-sharer="whatsapp" data-title="El Comercio" data-url="https://elcomercio.pe/politica/elecciones-peru-2026-planes-de-gobierno-propuestas-comparacion-fact-checking-candidatos-presidenciales-especdis-noticia/">Whatsapp</button>
+        <button id="tw" class="sharer button" data-sharer="twitter" data-title="El Comercio" data-hashtags="" data-via="elcomercio_peru" data-url="https://elcomercio.pe/politica/elecciones-peru-2026-planes-de-gobierno-propuestas-comparacion-fact-checking-candidatos-presidenciales-especdis-noticia/">Twitter</button>
+    </div>
+
     <!-- Hero Section -->
     <header class="hero">
         <div class="light-beams"></div>
         <div class="floating-elements">
             <div class="floating-element guitar">
-                <img src="./img/icon-portada-1.png" alt="" width="100%">
+                <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-portada-1.png" alt="" width="100%">
             </div>
             <div class="floating-element mic">
-                <img src="./img/icon-portada-3.png" alt="" width="100%">
+                <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-portada-3.png" alt="" width="100%">
             </div>
             <div class="floating-element vinyl">
-                <img src="./img/icon-portada-4.png" alt="" width="100%">
+                <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-portada-4.png" alt="" width="100%">
             </div>
             <div class="floating-element pick">
-                <img src="./img/icon-portada-2.png" alt="" width="100%">
+                <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-portada-2.png" alt="" width="100%">
             </div>
         </div>
         
@@ -157,6 +221,44 @@
         </div>
     </section>
 
-    <script src="./js/main.js?v13"></script>
+    <script src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/js/main.js?v15"></script>
+
+    <!-- compartir -->
+    <script>
+        /** Compartir URL en redes sociales **/
+        function shareUrl(event) {
+            const button = event.target;
+            const url = button.getAttribute('data-url');
+            
+            const sharer = button.getAttribute('data-sharer');
+            let shareUrl = '';
+
+            switch (sharer) {
+            case 'facebook':
+                const fbHashtag = button.getAttribute('data-hashtag') || '';
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&hashtag=${encodeURIComponent(fbHashtag)}`;
+                break;
+                
+            case 'whatsapp':
+                const whatsappTitle = button.getAttribute('data-title');
+                shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappTitle + ' ' + url)}`;
+                break;
+                
+            case 'twitter':
+                const twitterTitle = button.getAttribute('data-title');
+                const twitterHashtags = button.getAttribute('data-hashtags');
+                const twitterVia = button.getAttribute('data-via');
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterTitle)}&url=${encodeURIComponent(url)}&hashtags=${twitterHashtags}&via=${twitterVia}`;
+                break;
+            }
+
+            window.open(shareUrl, '_blank');
+        }
+
+        document.querySelectorAll('.sharer').forEach(button => {
+            button.addEventListener('click', shareUrl);
+        });
+    </script>
+
 </body>
 </html>

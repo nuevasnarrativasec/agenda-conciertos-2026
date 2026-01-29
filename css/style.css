@@ -59,6 +59,48 @@ body {
     overflow-x: hidden;
 }
 
+
+/* ============================================
+   SOCIAL BUTTONS
+   ============================================ */
+#social {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 600;
+    margin: 0;
+}
+
+#social ul {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    vertical-align: middle;
+}
+
+#social ul li {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 3px;
+    vertical-align: middle;
+}
+
+.sharer {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    text-indent: -9999px;
+    width: 36px;
+    background-size: 100% !important;
+}
+
+#fb { background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/fb-icon.png?v2) no-repeat 0 0; }
+#wst { background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/wsp-icon.png?v2) no-repeat 0 0; display: none; }
+#tw { background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/tw-icon.png?v2) no-repeat 0 0; }
+
+
+
 /* Header Section */
 .hero {
     position: relative;
@@ -1029,6 +1071,9 @@ body {
 
     .crowd-container{
         height: 220px;
+    }
+    #wst {
+        display: inline-block;
     }
 }
 
