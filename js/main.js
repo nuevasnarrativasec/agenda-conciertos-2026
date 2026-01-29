@@ -356,7 +356,7 @@ function renderCarousel() {
                     <p class="concert-venue">${concert.venue}</p>
                     <p class="concert-time">${concert.time}</p>
                     <a href="${concert.ticketUrl}" target="_blank" class="ticket-btn">
-                        <img src="./img/icon-ticket.png" width="100%">
+                        <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-ticket.png" width="100%">
                         <div class="box-ticket"> 
                             <p>Entradas en: </p>
                             <span>${concert.ticketProvider}</span>
@@ -552,7 +552,7 @@ function renderDetailConcerts(concerts, initialIndex = 0) {
                     <p class="concert-venue">${concert.venue}</p>
                     <p class="concert-time">${concert.time}</p>
                     <a href="${concert.ticketUrl}" target="_blank" class="ticket-btn">
-                        <img src="./img/icon-ticket.png" width="100%">
+                        <img src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/icon-ticket.png" width="100%">
                         <div class="box-ticket"> 
                             <p>Entradas en: </p>
                             <span>${concert.ticketProvider}</span>

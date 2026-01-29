@@ -2,20 +2,20 @@
 
 @font-face {
     font-family: 'BINDORAN';
-    src: url('../fonts/BINDORANRegular.woff2') format('woff2'),
-        url('../fonts/BINDORANRegular.woff') format('woff');
+    src: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/BINDORANRegular.woff2') format('woff2'),
+        url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/BINDORANRegular.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'Acto bold';
-    src: url('../fonts/Acto-Bold.woff2') format('woff2'),
-        url('../fonts/Acto-Bold.woff') format('woff');
+    src: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/Acto-Bold.woff2') format('woff2'),
+        url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/Acto-Bold.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'Acto black';
-    src: url('../fonts/Acto-Black.woff2') format('woff2'),
-        url('../fonts/Acto-Black.woff') format('woff');
+    src: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/Acto-Black.woff2') format('woff2'),
+        url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/fonts/Acto-Black.woff') format('woff');
     font-display: swap;
 }
 
@@ -50,7 +50,7 @@ html {
 
 body {
     background-attachment: fixed;
-    background-image: url('../img/bg.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     font-family: var(--font-body);
@@ -248,7 +248,7 @@ body {
 }
 
 .year-badge {
-    background: url('../img/year.png') no-repeat;    
+    background: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/year.png') no-repeat;    
     background-size: 100%;     
     bottom: -10px;
     height: 100px;
@@ -318,17 +318,17 @@ body {
 /* Variantes por sección */
 .section-home .crowd-container,
 .section-azul .crowd-container {
-    --crowd-bg: url('../img/manos-azul.png');
+    --crowd-bg: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/manos-azul.png');
 }
 
 .section-artistas .crowd-container,
 .section-cyan .crowd-container {
-    --crowd-bg: url('../img/manos-cyan.png');
+    --crowd-bg: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/manos-cyan.png');
 }
 
 .section-calendario .crowd-container,
 .section-amarillo .crowd-container {
-    --crowd-bg: url('../img/manos-amarillo.png');
+    --crowd-bg: url('https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/manos-amarillo.png');
 }
 
 .crowd {
