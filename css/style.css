@@ -64,11 +64,11 @@ body {
    SOCIAL BUTTONS
    ============================================ */
 #social {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 600;
     margin: 0;
+    position: relative;
+    right: 10px;
+    text-align: right;
+    top: 10px;   
 }
 
 #social ul {
