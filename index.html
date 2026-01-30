@@ -13,7 +13,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* Ocultar anuncios y elementos no deseados */   
+        /* Ocultar anuncios y elementos no deseados */  
+        
+        body.story{
+            background-attachment: fixed;
+            background-image: url(https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: auto !important;
+            min-height: inherit !important;
+        }
+        .overflow-y-hidden{
+            overflow-y: scroll !important;
+        }
+
         #clever-45754-1988799-sticky-footer,    
         .tp-modal,
         .tp-backdrop.tp-active,
@@ -43,7 +56,8 @@
         .orp-player-wrapper,
         #clever-45754-sticky-footer,
         #clever-45754-1475206-sticky-footer-shadow,
-        #elcomercio_zocalo{
+        #elcomercio_zocalo,
+        .cl-container{
             display: none !important;
             height: 0 !important;
         }   
