@@ -549,6 +549,7 @@ body {
 .concert-venue {
     font: .9rem/1.1 'arial';
     margin-bottom: 5px;
+    text-align: left;
 }
 
 .concert-time {
