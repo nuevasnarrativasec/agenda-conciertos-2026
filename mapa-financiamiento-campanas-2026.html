@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Economías ilegales y financiamiento de campañas — América Latina 2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+  :root{
+    --alto:#d64545;
+    --medio:#e0a020;
+    --bajo:#3f9e6a;
+    --ink:#1a1a1a;
+    --muted:#5c5c5c;
+    --border:#e3e3e3;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--font);color:var(--ink);background:#fff;}
+  .gda-wrap{max-width:900px;margin:0 auto;padding:8px;}
+  .gda-title{font-size:1.15rem;font-weight:700;line-height:1.25;margin:0 0 2px;}
+  .gda-sub{font-size:.85rem;color:var(--muted);margin:0 0 12px;}
+  #gda-map{height:560px;width:100%;border:1px solid var(--border);border-radius:8px;}
+  @media(max-width:600px){#gda-map{height:460px;}}
+  .gda-legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 2px 4px;font-size:.82rem;color:var(--ink);}
+  .gda-legend .item{display:flex;align-items:center;gap:6px;}
+  .gda-legend .dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.25);}
+  .gda-source{font-size:.72rem;color:var(--muted);margin:10px 2px 2px;}
+  /* Popups */
+  .leaflet-popup-content-wrapper{border-radius:8px;}
+  .leaflet-popup-content{margin:12px 14px;font-family:var(--font);max-width:270px;}
+  .pop-country{font-size:1rem;font-weight:700;margin:0 0 6px;display:flex;align-items:center;gap:7px;}
+  .pop-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap;}
+  .pop-row{margin:7px 0 0;font-size:.8rem;line-height:1.4;}
+  .pop-label{font-weight:700;color:var(--muted);text-transform:uppercase;font-size:.62rem;letter-spacing:.05em;display:block;margin-bottom:1px;}
+  .leaflet-tooltip.gda-hint{font-weight:700;font-size:.78rem;padding:3px 8px;}
+</style>
+</head>
+<body>
+<div class="gda-wrap">
+  <h2 class="gda-title">Dinero opaco en las urnas: economías ilegales y campañas en América Latina</h2>
+  <p class="gda-sub">Toca cada país para ver la economía ilegal reportada y las herramientas de fiscalización electoral.</p>
+  <div id="gda-map"></div>
+  <div class="gda-legend">
+    <span class="item"><span class="dot" style="background:var(--alto)"></span> Señales claras de infiltración</span>
+    <span class="item"><span class="dot" style="background:var(--medio)"></span> Riesgo latente / alertas</span>
+    <span class="item"><span class="dot" style="background:var(--bajo)"></span> Excepciones parciales</span>
+  </div>
+  <p class="gda-source">Fuente: Datos recopilados por diarios del Grupo de Diarios América (GDA). Investigación: Ángel Hugo Pilares / El Comercio.</p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function(){
+  var C = {alto:'#d64545', medio:'#e0a020', bajo:'#3f9e6a'};
+  var LABEL = {alto:'Infiltración clara', medio:'Riesgo latente', bajo:'Excepción parcial'};
+
+  var data = [
+    {p:"México", lat:23.6, lng:-102.5, r:"alto",
+     eco:"Narcotráfico y crimen organizado territorial",
+     tool:"Reformas legales, fiscalización del INE y mesas de seguridad con Gobernación, pero se concluye que han sido insuficientes para frenar la infiltración criminal."},
+    {p:"Colombia", lat:4.6, lng:-73.5, r:"alto",
+     eco:"Narcotráfico, minería ilegal y corrupción en contratación pública",
+     tool:"Consejo Nacional Electoral (CNE), Fiscalía y Misión de Observación Electoral (MOE). El CNE sancionó por primera vez una campaña presidencial en 2026."},
+    {p:"Brasil", lat:-12.0, lng:-51.9, r:"alto",
+     eco:"Narcotráfico (Comando Vermelho y PCC)",
+     tool:"La ley solo permite donaciones de personas naturales, no de empresas; hay vacíos legales que facilitan el uso de testaferros. Actúan Policía Federal y Ministerio Público."},
+    {p:"Perú", lat:-9.5, lng:-75.0, r:"alto",
+     eco:"Minería ilegal (principal), además pesca ilegal",
+     tool:"Fiscalización mediante reportes obligatorios de campaña (dos por elección). La trazabilidad es débil: muchos candidatos declaran autofinanciamiento o no reportan aportes."},
+    {p:"Venezuela", lat:7.2, lng:-66.6, r:"alto",
+     eco:"Minería ilegal, narcotráfico y contrabando de combustible",
+     tool:"Formalmente fiscalizan el CNE y la Contraloría. Se alerta que no existe autonomía real ni fiscalización efectiva sobre el oficialismo."},
+    {p:"República Dominicana", lat:18.9, lng:-70.5, r:"alto",
+     eco:"Narcotráfico, lavado de activos y corrupción",
+     tool:"Junta Central Electoral (JCE). Existen registros oficiales de aportes, pero múltiples casos muestran uso de efectivo, sobornos y recursos no declarados."},
+    {p:"Argentina", lat:-36.0, lng:-64.5, r:"alto",
+     eco:"Narcotráfico, juego clandestino y lavado inmobiliario",
+     tool:"No se detallan mecanismos formales de fiscalización electoral, pero hay investigaciones judiciales, fiscales y condenas vinculadas a financiamiento ilegal."},
+    {p:"El Salvador", lat:13.8, lng:-88.9, r:"alto",
+     eco:"Pandillas, lavado de dinero y financiamiento opaco",
+     tool:"Tribunal Supremo Electoral (TSE). Puede auditar el financiamiento, con limitaciones técnicas, presupuestarias y de acceso a información."},
+    {p:"Uruguay", lat:-32.8, lng:-55.8, r:"medio",
+     eco:"Sin evidencia de penetración electoral directa; riesgo latente por narcotráfico",
+     tool:"La Fiscalía aparece como principal barrera institucional; se mencionan alertas ante amenazas e intentos potenciales de presión sobre operadores judiciales."},
+    {p:"Chile", lat:-35.5, lng:-71.3, r:"bajo",
+     eco:"Sin evidencia actual de penetración directa",
+     tool:"Servicio Electoral (Servel), con Sistema de Rendición Online y auditoría de ingresos y gastos electorales. Uno de los sistemas más robustos del reporte."},
+    {p:"Costa Rica", lat:9.9, lng:-84.0, r:"bajo",
+     eco:"Sin evidencia directa actual",
+     tool:"Tribunal Supremo de Elecciones (TSE). Revisa la solvencia económica de los financistas y puede remitir hallazgos al Ministerio Público."}
+  ];
+
+  var map = L.map('gda-map', {scrollWheelZoom:false, zoomControl:true});
+  map.setView([-8, -70], 3);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains:'abcd', maxZoom:12
+  }).addTo(map);
+
+  // Habilitar zoom con rueda solo al enfocar el mapa
+  map.on('focus', function(){ map.scrollWheelZoom.enable(); });
+  map.on('blur',  function(){ map.scrollWheelZoom.disable(); });
+
+  var bounds = [];
+  data.forEach(function(d){
+    bounds.push([d.lat, d.lng]);
+    var m = L.circleMarker([d.lat, d.lng], {
+      radius:9, color:'#fff', weight:2, fillColor:C[d.r], fillOpacity:.95
+    }).addTo(map);
+
+    m.bindTooltip(d.p, {direction:'top', offset:[0,-6], className:'gda-hint'});
+
+    var html =
+      '<div class="pop-country">'+d.p+
+        '<span class="pop-badge" style="background:'+C[d.r]+'">'+LABEL[d.r]+'</span>'+
+      '</div>'+
+      '<div class="pop-row"><span class="pop-label">Economía ilegal reportada</span>'+d.eco+'</div>'+
+      '<div class="pop-row"><span class="pop-label">Herramientas de control / fiscalización</span>'+d.tool+'</div>';
+    m.bindPopup(html, {maxWidth:290});
+  });
+
+  map.fitBounds(bounds, {padding:[40,40]});
+})();
+</script>
+</body>
+</html>
