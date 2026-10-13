@@ -276,5 +276,35 @@
         });
     </script>
 
+    <!-- auto-resize para embed en iframe -->
+    <script>
+        (function () {
+            if (window.self === window.top) return;
+
+            var lastHeight = 0;
+
+            function sendHeight() {
+                var height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+                if (height !== lastHeight) {
+                    lastHeight = height;
+                    window.parent.postMessage({ source: 'agenda-conciertos-2026', type: 'resize', height: height }, '*');
+                }
+            }
+
+            window.addEventListener('load', sendHeight);
+            window.addEventListener('resize', sendHeight);
+
+            if ('ResizeObserver' in window) {
+                new ResizeObserver(function () {
+                    requestAnimationFrame(sendHeight);
+                }).observe(document.body);
+            } else {
+                setInterval(sendHeight, 500);
+            }
+
+            sendHeight();
+        })();
+    </script>
+
 </body>
 </html>
