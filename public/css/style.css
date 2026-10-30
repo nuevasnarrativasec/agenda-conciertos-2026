@@ -68,7 +68,8 @@ body {
     position: relative;
     right: 10px;
     text-align: right;
-    top: 10px;   
+    top: 10px;  
+    display: none; 
 }
 
 #social ul {
