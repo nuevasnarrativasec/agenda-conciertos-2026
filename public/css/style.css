@@ -2,20 +2,20 @@
 
 @font-face {
     font-family: 'BINDORAN';
-    src: url('../fonts/BINDORANRegular.woff2') format('woff2'),
-        url('../fonts/BINDORANRegular.woff') format('woff');
+    src: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/BINDORANRegular.woff2') format('woff2'),
+        url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/BINDORANRegular.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'Acto bold';
-    src: url('../fonts/Acto-Bold.woff2') format('woff2'),
-        url('../fonts/Acto-Bold.woff') format('woff');
+    src: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/Acto-Bold.woff2') format('woff2'),
+        url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/Acto-Bold.woff') format('woff');
     font-display: swap;
 }
 @font-face {
     font-family: 'Acto black';
-    src: url('../fonts/Acto-Black.woff2') format('woff2'),
-        url('../fonts/Acto-Black.woff') format('woff');
+    src: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/Acto-Black.woff2') format('woff2'),
+        url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/fonts/Acto-Black.woff') format('woff');
     font-display: swap;
 }
 
@@ -318,17 +318,17 @@ body {
 /* Variantes por sección */
 .section-home .crowd-container,
 .section-azul .crowd-container {
-    --crowd-bg: url('../img/manos-azul.png');
+    --crowd-bg: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/img/manos-azul.png');
 }
 
 .section-artistas .crowd-container,
 .section-cyan .crowd-container {
-    --crowd-bg: url('../img/manos-cyan.png');
+    --crowd-bg: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/img/manos-cyan.png');
 }
 
 .section-calendario .crowd-container,
 .section-amarillo .crowd-container {
-    --crowd-bg: url('../img/manos-amarillo.png');
+    --crowd-bg: url('https://agenda-conciertos-2026.nuevasnarrativas-ec.workers.dev/img/manos-amarillo.png');
 }
 
 .crowd {
