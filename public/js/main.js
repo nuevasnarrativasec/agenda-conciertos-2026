@@ -21,6 +21,12 @@ let currentCalendarMonth = new Date().getMonth();
 let currentCalendarYear = 2026;
 let filteredConcerts = [];
 
+const BASE_YEAR = 2026;
+
+function formatMonthTitle(month, year) {
+    return year !== BASE_YEAR ? `${year} | ${month}` : month;
+}
+
 // Variables para el carrusel de detalle
 let detailCarouselIndex = 0;
 let detailConcerts = [];
@@ -469,7 +475,7 @@ function updateCarouselButtons() {
 }
 
 function renderCalendar() {
-    calendarMonthTitle.textContent = monthNames[currentCalendarMonth];
+    calendarMonthTitle.textContent = formatMonthTitle(monthNames[currentCalendarMonth], currentCalendarYear);
     
     const firstDay = new Date(currentCalendarYear, currentCalendarMonth, 1);
     const lastDay = new Date(currentCalendarYear, currentCalendarMonth + 1, 0);
@@ -573,7 +579,7 @@ function updateDetailCarouselPosition() {
     // Actualizar el título del mes según el concierto actual
     if (detailConcerts.length > 0) {
         const currentConcert = detailConcerts[detailCarouselIndex];
-        detailMonthTitle.textContent = currentConcert.month;
+        detailMonthTitle.textContent = formatMonthTitle(currentConcert.month, currentConcert.year);
     }
     
     // Activar el video del concierto actual
@@ -703,10 +709,24 @@ function showDayDetail(day) {
             startIndex = 0; // Si no encuentra el día exacto, empezar desde el inicio
         }
         
-        detailMonthTitle.textContent = monthNames[currentCalendarMonth];
+        detailMonthTitle.textContent = formatMonthTitle(monthNames[currentCalendarMonth], currentCalendarYear);
         renderDetailConcerts(monthConcerts, startIndex);
         showView('detail');
     }
+}
+
+function goToPrimerConcierto2027() {
+    const index = filteredConcerts.findIndex(c => c.year === 2027);
+    if (index === -1) return;
+
+    currentCarouselIndex = index;
+    showView('home');
+
+    setTimeout(() => {
+        updateCarouselPosition();
+        monthSection.scrollIntoView({ behavior: 'smooth' });
+        activateVideo(currentCarouselIndex);
+    }, 200);
 }
 
 function showArtistDetail(artistName) {
@@ -746,6 +766,10 @@ function setupEventListeners() {
         setTimeout(() => {
             calendarSection.scrollIntoView({ behavior: 'smooth' });
         }, 100);
+    });
+
+    document.getElementById('btnConciertos2027').addEventListener('click', () => {
+        goToPrimerConcierto2027();
     });
 
     // Botones de filtro
